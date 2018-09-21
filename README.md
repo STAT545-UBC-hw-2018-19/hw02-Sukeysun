@@ -1,5 +1,4 @@
 #Assignment 2
-
 ## By doing this assignment, I can reinforce：
   + pull/push/edit github file locally
   + some basic skills to explore data:
