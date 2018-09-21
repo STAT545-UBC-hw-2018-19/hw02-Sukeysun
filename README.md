@@ -1,2 +1,2 @@
-#Assignment 2 :smile:
-##Explore Gapminder and use dplyr
+# Assignment 2 :smile:
+## Explore Gapminder and use dplyr
