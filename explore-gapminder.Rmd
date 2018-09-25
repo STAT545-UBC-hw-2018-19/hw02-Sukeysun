@@ -1,0 +1,237 @@
+---
+title: "Explore gapminder"
+author: "sukey"
+date: "September 20, 2018"
+output: html_document
+---
+
+## Smell test the data
+Explore the gapminder object:
+```{r,warning=FALSE,message=FALSE}
+library(gapminder)
+library(tidyverse)
+library(dplyr)
+```
+
+  * #### Is it a data.frame, a matrix, a vector, a list?
+```{r, echo=T,results='hide'}
+inherits(gapminder,"data.frame") 
+### or we can also use "str()"
+str(gapminder)
+```
+**<u> Answer: The function returns "True", so it is a data frame </u>. Using str() gives you that information plus extra goodies (such as the levels of your factors and the first few values of each variable)** 
+
+  * #### What is its class?
+```{r, results='hide'}
+class(gapminder) 
+```
+**<u> Answer: The class of gapminder is  "data.frame" </u>. The function class prints the vector names of classes an object inherits from**  
+
+  * #### How many variables/columns?
+```{r,results='hide'}
+ncol(gapminder) 
+```
+**<u> Answer: The number of columns is 6 </u>. Also we can use str() function and then count the number of columns**  
+
+  * #### How many rows/observations?
+```{r,results='hide'}
+nrow(gapminder) 
+```
+**<u> Answer: The number of rows is 1704 </u>.**
+
+  * #### Can you get these facts about “extent” or “size” in more than one way? Can you imagine different    functions being useful in different contexts?
+```{r,results='hide'}
+dim(gapminder) # this function can directly return the size
+str(gapminder) # str() returns size and other info
+nrow(gapminder) # nrow() can combine with ncol() to check the size of data
+ncol(gapminder)
+```
+**<u> Answer:  1704 rows and 6 columns </u>. dim() returns the dimensions of an object. rowNumber = dim(object)[1]; colNumber = dim(object)[2]**  
+
+  * ####  What data type is each variable?
+```{r,results='hold'}
+str(gapminder)
+```
+**<u> Answer: The type of each variable is shown as above </u>: ** 
+
+  + Country is factor
+  + continent is also factor
+  + year is int
+  + lifeExp is numberic
+  + pop is int
+
+
+---
+## Explore individual variables  
+
+Pick at least one categorical variable and at least one quantitative variable to explore: 
+
+  * #### What are possible values (or range, whichever is appropriate) of each variable?
+  
+```{r, results='hold'}
+summary(gapminder)
+```
+country and continent are categorical variables and year,lifeExp,pop,gdpPercap are quantitative variable; the possible values of each variable are shown as above.  
+
+If we only want check the information of one value at each time, here are some functions we can use: 
+
+```{r, results='hide'}
+attach(gapminder)  # when using attach(), onjects in the database can be accesed by simply giving names. instead of using object$value
+
+###################################  quantitative variable   #########################################
+range(year)   # it is shown that the range of "year" is from 1952 to 2007
+
+####  we can also use min() and max() to check the range
+min(year)   # 1952
+max(year)   # 2007
+
+### what about summary？ 
+summary(year)
+
+#################################### categorical variable #########################################
+summary(country) # unlike quantitative variable, summary(categorical variable) returns the frequenct of each category
+
+### besides summary(), table() is also a nice try
+table(country)
+
+```
+
+
+  * ####  What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.
+  
+```{r,results='hold'}
+summary(lifeExp)
+table(continent)
+```
+  
+**Answer: the typical values of lifeExp are: mean = 59.47 Median = 60.71; The overall spread of lifeExp is max-min = 1318939990, IQR = 3rd-1st = 16796000; There are 624 information from Africa, 300 from Americas, 396 from Asia, 360 from Europe and 24 from Oceania **
+
+---
+## Explore various plot types  
+
+```{r,results='hide'}
+### There is a lot of data, but I only want to foucs on the information from Asia
+
+info_Asia <- gapminder %>% 
+  filter(continent == 'Asia')
+summary(info_Asia$country)
+info_Asia <-rename(info_Asia, cou = country)
+ggplot(info_Asia, aes(cou, pop)) +
+  geom_boxplot(aes(fill = cou)) +
+  ggtitle("Distrubtion of pop in Asia")
+```
+
+***There are too many countries in my graph, but I only have intrest in country with huge population***
+
+```{r, results='hide',warning=FALSE}
+
+info_Asia <- gapminder %>% 
+  filter(continent == 'Asia' & pop > 1000000000)
+summary(info_Asia$country)
+info_Asia <-rename(info_Asia, cou = country)
+ggplot(info_Asia, aes(cou, pop)) +
+  geom_boxplot(aes(fill = cou)) +
+  ggtitle("Distrubtion of pop in Asia")
+```
+
+
+**According to the garph above, we can find that China and India are the countries with large population in Asia**
+
+
+***Now I want to get more information of China and India, and find some differences***
+
+```{r,warning=FALSE}
+China_India <- gapminder %>% 
+  filter(country %in% c("China","India"))
+dim(China_India)  ## check the size of China_India
+knitr::kable(China_India) ## use table presentation
+```
+
+**I would to use tabke to have a first look and it seems that there are somthing intresting among population, year and gdp. Let's check it!**
+
+```{r,warning=FALSE}
+#### take China as an example
+China <- gapminder %>% 
+  filter(country == 'China') %>% 
+  arrange(year,pop)
+#knitr::kable(China)
+
+ggplot(China, aes(pop, gdpPercap)) +
+  geom_point(alpha = 0.5,colour = "blue") +
+  ggtitle("Relationship between population and gdp")
+
+ggplot(China, aes(year, gdpPercap)) +
+  geom_point(alpha = 0.5,colour = "blue") +
+  ggtitle("Relationship between year and gdp")
+```
+
+
+
+
+
+
+
+
+
+**As I guessed before, gdp grows up with year and population**
+
+***if we want to see the all relationships between variables, use cool pairs()***
+
+```{r}
+pairs(gapminder)
+```
+
+
+
+
+
+
+
+***let's try put rainbow on garph***
+
+```{r}
+myData <- gapminder %>% dplyr::select(lifeExp)
+binwidth = 0.5
+library(ggplot2)   # CRAN version 2.2.1 used
+n_bins <- length(ggplot2:::bin_breaks_width(range(myData), width = binwidth)$breaks) - 1L
+ggplot() + 
+  geom_histogram(aes(x = myData), binwidth = binwidth, fill = rainbow(n_bins)) +
+  ggtitle("try rainbow()")
+
+```
+
+
+***one graph first and then put on another***
+
+```{r}
+ggplot(gapminder, aes(lifeExp)) +
+  geom_histogram(aes(y =..density..),fill = "blue",alpha = 0.1)+
+  geom_density(color = "red")
+```
+
+
+```{r}
+gapminder %>% 
+  filter(country == "Canada") %>% 
+  ggplot(aes(year, pop)) +
+  geom_jitter( colour = "green")+
+  geom_violin(colour ="red")
+
+```
+
+---
+## Use filter(), select() and %>%
+I used these functions in my hw02, expecially in **Explore various plot types**
+
+ 
+ 
+
+ 
+---
+## But I want to do more!
+
+```{r}
+afterFilter <- filter(gapminder, country == c("Rwanda", "Afghanistan"))
+unique(afterFilter$country)
+```
+**Answer: yes it is a correct way**
