@@ -104,7 +104,7 @@ summary(lifeExp)
 table(continent)
 ```
   
-**Answer: the typical values of lifeExp are: mean = 59.47 Median = 60.71; The overall spread of lifeExp is max-min = 1318939990, IQR = 3rd-1st = 16796000; There are 624 information from Africa, 300 from Americas, 396 from Asia, 360 from Europe and 24 from Oceania **
+**Answer: the typical values of lifeExp are: mean = 59.47 Median = 60.71; The overall spread of lifeExp is max-min = 1318939990, IQR = 3rd-1st = 16796000; There are 624 information from Africa, 300 from Americas, 396 from Asia, 360 from Europe and 24 from Oceania**
 
 ---
 ## Explore various plot types  
