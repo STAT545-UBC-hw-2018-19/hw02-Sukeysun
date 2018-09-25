@@ -71,7 +71,7 @@ str(gapminder)
     ##  $ pop      : int  8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
     ##  $ gdpPercap: num  779 821 853 836 740 ...
 
-  **<u> Answer: The type of each variable is shown as above </u>:**
+  **<u> Answer: The type of each variable </u>:**
 
         + Country is factor
         + continent is also factor
@@ -101,7 +101,7 @@ ggplot(info_Asia, aes(cou, pop)) +
 
 ![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-11-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-11-1.png)
 
-***There are too many countries in my graph, but I only have intrest in country with huge population***
+***There are too many countries in my graph, but I only have interest in countries with huge population***
 
 ``` r
 info_Asia <- gapminder %>% 
