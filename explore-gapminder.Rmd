@@ -221,8 +221,10 @@ gapminder %>%
 
 ```
 ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-18-1.png)
+
 ---
 ## Use filter(), select() and %>%
+
 ```{r}
 select(gapminder,year, pop, country) %>%   
   arrange(year, pop) %>%
@@ -234,10 +236,6 @@ select(gapminder,year, pop, country) %>%
 ```
 
 ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-19-1.png)
- 
- 
-
- 
 ---
 ## But I want to do more!
 
@@ -245,4 +243,21 @@ select(gapminder,year, pop, country) %>%
 afterFilter <- filter(gapminder, country == c("Rwanda", "Afghanistan"))
 unique(afterFilter$country)
 ```
-**Answer: yes it is a correct way**
+
+**Answer: yes it is a correct way. By using unique(), we can find that after filtering, only information from "Rwanda" and "Afghanistan" left. Let's check it at a look at table**
+
+```{r,results='hold'}
+knitr::kable(afterFilter)
+```
+
+**Use more of the dplyr functions for operating on a single table.**  
+**Now, I would like to use filter() to choose the information from "Asia", and then sort the information according to year**
+
+```{r,results='hold'}
+
+temp1 <- filter(afterFilter, continent == "Asia") %>% 
+  arrange(year)
+
+knitr::kable(temp1)
+```
+

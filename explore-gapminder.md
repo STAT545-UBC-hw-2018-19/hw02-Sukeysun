@@ -234,22 +234,7 @@ gapminder %>%
   geom_violin(colour ="red")
 ```
 
-![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-18-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-18-1.png) --- \#\# Use filter(), select() and %&gt;%
-
-``` r
-select(gapminder,year, pop, country) %>%   
-  arrange(year, pop) %>%
-  filter(country == "China"| country == "India") %>% 
-  ggplot(aes(country,pop)) +
-  geom_boxplot(aes(fill = country))+
-  ggtitle("Population in each year from China and India")
-```
-
-![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-19-1.png)
-
-![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-19-1.png)
-
-------------------------------------------------------------------------
+![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-18-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-18-1.png)
 
 But I want to do more!
 ----------------------
@@ -262,4 +247,42 @@ unique(afterFilter$country)
     ## [1] Afghanistan Rwanda     
     ## 142 Levels: Afghanistan Albania Algeria Angola Argentina ... Zimbabwe
 
-**Answer: yes it is a correct way**
+**Answer: yes it is a correct way. By using unique(), we can find that after filtering, only information from "Rwanda" and "Afghanistan" left. Let's check it at a look at table**
+
+``` r
+knitr::kable(afterFilter)
+```
+
+| country     | continent |  year|  lifeExp|       pop|  gdpPercap|
+|:------------|:----------|-----:|--------:|---------:|----------:|
+| Afghanistan | Asia      |  1957|   30.332|   9240934|   820.8530|
+| Afghanistan | Asia      |  1967|   34.020|  11537966|   836.1971|
+| Afghanistan | Asia      |  1977|   38.438|  14880372|   786.1134|
+| Afghanistan | Asia      |  1987|   40.822|  13867957|   852.3959|
+| Afghanistan | Asia      |  1997|   41.763|  22227415|   635.3414|
+| Afghanistan | Asia      |  2007|   43.828|  31889923|   974.5803|
+| Rwanda      | Africa    |  1952|   40.000|   2534927|   493.3239|
+| Rwanda      | Africa    |  1962|   43.000|   3051242|   597.4731|
+| Rwanda      | Africa    |  1972|   44.600|   3992121|   590.5807|
+| Rwanda      | Africa    |  1982|   46.218|   5507565|   881.5706|
+| Rwanda      | Africa    |  1992|   23.599|   7290203|   737.0686|
+| Rwanda      | Africa    |  2002|   43.413|   7852401|   785.6538|
+
+**Use more of the dplyr functions for operating on a single table.**
+**Now, I would like to use filter() to choose the information from "Asia", and then sort the information according to year**
+
+``` r
+temp1 <- filter(afterFilter, continent == "Asia") %>% 
+  arrange(year)
+
+knitr::kable(temp1)
+```
+
+| country     | continent |  year|  lifeExp|       pop|  gdpPercap|
+|:------------|:----------|-----:|--------:|---------:|----------:|
+| Afghanistan | Asia      |  1957|   30.332|   9240934|   820.8530|
+| Afghanistan | Asia      |  1967|   34.020|  11537966|   836.1971|
+| Afghanistan | Asia      |  1977|   38.438|  14880372|   786.1134|
+| Afghanistan | Asia      |  1987|   40.822|  13867957|   852.3959|
+| Afghanistan | Asia      |  1997|   41.763|  22227415|   635.3414|
+| Afghanistan | Asia      |  2007|   43.828|  31889923|   974.5803|
