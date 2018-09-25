@@ -99,7 +99,7 @@ ggplot(info_Asia, aes(cou, pop)) +
   ggtitle("Distrubtion of pop in Asia")
 ```
 
-![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-11-1.png)
+![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-11-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-11-1.png)
 
 ***There are too many countries in my graph, but I only have intrest in country with huge population***
 
@@ -113,7 +113,7 @@ ggplot(info_Asia, aes(cou, pop)) +
   ggtitle("Distrubtion of pop in Asia")
 ```
 
-![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-12-1.png)
+![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-12-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-12-1.png)
 
 **According to the garph above, we can find that China and India are the countries with large population in Asia**
 
@@ -182,6 +182,8 @@ ggplot(China, aes(year, gdpPercap)) +
 
 ![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-14-2.png)
 
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-3.png)
+
 **As I guessed before, gdp grows up with year and population**
 
 ***if we want to see the all relationships between variables, use cool pairs()***
@@ -191,6 +193,8 @@ pairs(gapminder)
 ```
 
 ![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-15-1.png)
+
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-15-1.png)
 
 ***let's try put rainbow on garph***
 
@@ -206,7 +210,7 @@ ggplot() +
 
     ## Don't know how to automatically pick scale for object of type tbl_df/tbl/data.frame. Defaulting to continuous.
 
-![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-16-1.png)
+![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-16-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-16-1.png)
 
 ***one graph first and then put on another***
 
@@ -220,6 +224,8 @@ ggplot(gapminder, aes(lifeExp)) +
 
 ![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-17-1.png)
 
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-17-1.png)
+
 ``` r
 gapminder %>% 
   filter(country == "Canada") %>% 
@@ -228,7 +234,9 @@ gapminder %>%
   geom_violin(colour ="red")
 ```
 
-![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-18-1.png)
+![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-18-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-18-1.png) --- \#\# Use filter(), select() and %&gt;% I used these functions in my hw02, expecially in **Explore various plot types**
+
+------------------------------------------------------------------------
 
 But I want to do more!
 ----------------------
