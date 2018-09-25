@@ -118,6 +118,7 @@ ggplot(info_Asia, aes(cou, pop)) +
   geom_boxplot(aes(fill = cou)) +
   ggtitle("Distrubtion of pop in Asia")
 ```
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-11-1.png)
 
 ***There are too many countries in my graph, but I only have intrest in country with huge population***
 
