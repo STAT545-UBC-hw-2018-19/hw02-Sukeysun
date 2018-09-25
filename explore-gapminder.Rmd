@@ -132,7 +132,7 @@ ggplot(info_Asia, aes(cou, pop)) +
   geom_boxplot(aes(fill = cou)) +
   ggtitle("Distrubtion of pop in Asia")
 ```
-
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-12-1.png)
 
 **According to the garph above, we can find that China and India are the countries with large population in Asia**
 
@@ -164,8 +164,8 @@ ggplot(China, aes(year, gdpPercap)) +
   ggtitle("Relationship between year and gdp")
 ```
 
-
-
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-1.png)
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-3.png)
 
 
 
@@ -180,7 +180,7 @@ ggplot(China, aes(year, gdpPercap)) +
 pairs(gapminder)
 ```
 
-
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-15-1.png)
 
 
 
@@ -198,7 +198,7 @@ ggplot() +
   ggtitle("try rainbow()")
 
 ```
-
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-16-1.png)
 
 ***one graph first and then put on another***
 
@@ -208,6 +208,7 @@ ggplot(gapminder, aes(lifeExp)) +
   geom_density(color = "red")
 ```
 
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-17-1.png)
 
 ```{r}
 gapminder %>% 
@@ -217,7 +218,7 @@ gapminder %>%
   geom_violin(colour ="red")
 
 ```
-
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-18-1.png)
 ---
 ## Use filter(), select() and %>%
 I used these functions in my hw02, expecially in **Explore various plot types**
