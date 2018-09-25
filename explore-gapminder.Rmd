@@ -1,8 +1,6 @@
 ---
-title: "Explore gapminder"
-author: "sukey"
-date: "September 20, 2018"
-output: github_document:
+title: "hw02"
+output: github_document
 ---
 
 ## Smell test the data
