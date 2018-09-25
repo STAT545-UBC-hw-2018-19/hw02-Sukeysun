@@ -2,9 +2,7 @@
 title: "Explore gapminder"
 author: "sukey"
 date: "September 20, 2018"
-output:
-    html_document:
-        keep_md: true
+output: github_document:
 ---
 
 ## Smell test the data
