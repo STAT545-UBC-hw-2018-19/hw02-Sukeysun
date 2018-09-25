@@ -4,7 +4,8 @@ output: github_document
 ---
 
 ## Smell test the data
-Explore the gapminder object:
+### Explore the gapminder object:
+
 ```{r,warning=FALSE,message=FALSE}
 library(gapminder)
 library(tidyverse)
@@ -17,25 +18,25 @@ inherits(gapminder,"data.frame")
 ### or we can also use "str()"
 str(gapminder)
 ```
-**<u> Answer: The function returns "True", so it is a data frame </u>. Using str() gives you that information plus extra goodies (such as the levels of your factors and the first few values of each variable)** 
+&emsp;&emsp;**<u> Answer: The function returns "True", so it is a data frame </u>. Using str() gives you that information plus extra goodies (such as the levels of your factors and the first few values of each variable)** 
 
   * #### What is its class?
 ```{r, results='hide'}
 class(gapminder) 
 ```
-**<u> Answer: The class of gapminder is  "data.frame" </u>. The function class prints the vector names of classes an object inherits from**  
+&emsp;&emsp;**<u> Answer: The class of gapminder is  "data.frame" </u>. The function class prints the vector names of classes an object inherits from**  
 
   * #### How many variables/columns?
 ```{r,results='hide'}
 ncol(gapminder) 
 ```
-**<u> Answer: The number of columns is 6 </u>. Also we can use str() function and then count the number of columns**  
+&emsp;&emsp;**<u> Answer: The number of columns is 6 </u>. Also we can use str() function and then count the number of columns**  
 
   * #### How many rows/observations?
 ```{r,results='hide'}
 nrow(gapminder) 
 ```
-**<u> Answer: The number of rows is 1704 </u>.**
+&emsp;&emsp;**<u> Answer: The number of rows is 1704 </u>.**
 
   * #### Can you get these facts about “extent” or “size” in more than one way? Can you imagine different    functions being useful in different contexts?
 ```{r,results='hide'}
@@ -44,32 +45,32 @@ str(gapminder) # str() returns size and other info
 nrow(gapminder) # nrow() can combine with ncol() to check the size of data
 ncol(gapminder)
 ```
-**<u> Answer:  1704 rows and 6 columns </u>. dim() returns the dimensions of an object. rowNumber = dim(object)[1]; colNumber = dim(object)[2]**  
+&emsp;&emsp;**<u> Answer:  1704 rows and 6 columns </u>. dim() returns the dimensions of an object. rowNumber = dim(object)[1]; colNumber = dim(object)[2]**  
 
   * ####  What data type is each variable?
 ```{r,results='hold'}
 str(gapminder)
 ```
-**<u> Answer: The type of each variable is shown as above </u>: ** 
+&emsp;&emsp;**<u> Answer: The type of each variable is shown as above </u>:** 
 
-  + Country is factor
-  + continent is also factor
-  + year is int
-  + lifeExp is numberic
-  + pop is int
+        + Country is factor
+        + continent is also factor
+        + year is int
+        + lifeExp is numberic
+        + pop is int
 
 
 ---
 ## Explore individual variables  
 
-Pick at least one categorical variable and at least one quantitative variable to explore: 
+### Pick at least one categorical variable and at least one quantitative variable to explore: 
 
   * #### What are possible values (or range, whichever is appropriate) of each variable?
   
 ```{r, results='hold'}
 summary(gapminder)
 ```
-country and continent are categorical variables and year,lifeExp,pop,gdpPercap are quantitative variable; the possible values of each variable are shown as above.  
+&emsp;&emsp;country and continent are categorical variables and year,lifeExp,pop,gdpPercap are quantitative variable; the possible values of each variable are shown as above.  
 
 If we only want check the information of one value at each time, here are some functions we can use: 
 
@@ -107,8 +108,10 @@ table(continent)
 ---
 ## Explore various plot types  
 
+**There is a lot of data, but I only want to foucs on the information from Asia**
+
 ```{r,results='hide'}
-### There is a lot of data, but I only want to foucs on the information from Asia
+
 
 info_Asia <- gapminder %>% 
   filter(continent == 'Asia')
@@ -165,7 +168,7 @@ ggplot(China, aes(year, gdpPercap)) +
 ```
 
 ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-1.png)
-![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-3.png)
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-2.png)
 
 
 
@@ -196,7 +199,6 @@ n_bins <- length(ggplot2:::bin_breaks_width(range(myData), width = binwidth)$bre
 ggplot() + 
   geom_histogram(aes(x = myData), binwidth = binwidth, fill = rainbow(n_bins)) +
   ggtitle("try rainbow()")
-
 ```
 ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-16-1.png)
 
@@ -221,8 +223,17 @@ gapminder %>%
 ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-18-1.png)
 ---
 ## Use filter(), select() and %>%
-I used these functions in my hw02, expecially in **Explore various plot types**
+```{r}
+select(gapminder,year, pop, country) %>%   
+  arrange(year, pop) %>%
+  filter(country == "China"| country == "India") %>% 
+  ggplot(aes(country,pop)) +
+  geom_boxplot(aes(fill = country))+
+  ggtitle("Population in each year from China and India")
+  
+```
 
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-19-1.png)
  
  
 

@@ -4,7 +4,7 @@ hw02
 Smell test the data
 -------------------
 
-Explore the gapminder object:
+### Explore the gapminder object:
 
 ``` r
 library(gapminder)
@@ -20,7 +20,7 @@ inherits(gapminder,"data.frame")
 str(gapminder)
 ```
 
-**<u> Answer: The function returns "True", so it is a data frame </u>. Using str() gives you that information plus extra goodies (such as the levels of your factors and the first few values of each variable)**
+  **<u> Answer: The function returns "True", so it is a data frame </u>. Using str() gives you that information plus extra goodies (such as the levels of your factors and the first few values of each variable)**
 
 -   #### What is its class?
 
@@ -28,7 +28,7 @@ str(gapminder)
 class(gapminder) 
 ```
 
-**<u> Answer: The class of gapminder is "data.frame" </u>. The function class prints the vector names of classes an object inherits from**
+  **<u> Answer: The class of gapminder is "data.frame" </u>. The function class prints the vector names of classes an object inherits from**
 
 -   #### How many variables/columns?
 
@@ -36,7 +36,7 @@ class(gapminder)
 ncol(gapminder) 
 ```
 
-**<u> Answer: The number of columns is 6 </u>. Also we can use str() function and then count the number of columns**
+  **<u> Answer: The number of columns is 6 </u>. Also we can use str() function and then count the number of columns**
 
 -   #### How many rows/observations?
 
@@ -44,7 +44,7 @@ ncol(gapminder)
 nrow(gapminder) 
 ```
 
-**<u> Answer: The number of rows is 1704 </u>.**
+  **<u> Answer: The number of rows is 1704 </u>.**
 
 -   #### Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?
 
@@ -55,7 +55,7 @@ nrow(gapminder) # nrow() can combine with ncol() to check the size of data
 ncol(gapminder)
 ```
 
-**<u> Answer: 1704 rows and 6 columns </u>. dim() returns the dimensions of an object. rowNumber = dim(object)\[1\]; colNumber = dim(object)\[2\]**
+  **<u> Answer: 1704 rows and 6 columns </u>. dim() returns the dimensions of an object. rowNumber = dim(object)\[1\]; colNumber = dim(object)\[2\]**
 
 -   #### What data type is each variable?
 
@@ -71,20 +71,20 @@ str(gapminder)
     ##  $ pop      : int  8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
     ##  $ gdpPercap: num  779 821 853 836 740 ...
 
-**<u> Answer: The type of each variable is shown as above </u>: **
+  **<u> Answer: The type of each variable is shown as above </u>:**
 
--   Country is factor
--   continent is also factor
--   year is int
--   lifeExp is numberic
--   pop is int
+        + Country is factor
+        + continent is also factor
+        + year is int
+        + lifeExp is numberic
+        + pop is int
 
 Explore various plot types
 --------------------------
 
-``` r
-### There is a lot of data, but I only want to foucs on the information from Asia
+**There is a lot of data, but I only want to foucs on the information from Asia**
 
+``` r
 info_Asia <- gapminder %>% 
   filter(continent == 'Asia')
 ```
@@ -182,7 +182,7 @@ ggplot(China, aes(year, gdpPercap)) +
 
 ![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-14-2.png)
 
-![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-3.png)
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-14-2.png)
 
 **As I guessed before, gdp grows up with year and population**
 
@@ -234,7 +234,20 @@ gapminder %>%
   geom_violin(colour ="red")
 ```
 
-![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-18-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-18-1.png) --- \#\# Use filter(), select() and %&gt;% I used these functions in my hw02, expecially in **Explore various plot types**
+![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-18-1.png) ![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-18-1.png) --- \#\# Use filter(), select() and %&gt;%
+
+``` r
+select(gapminder,year, pop, country) %>%   
+  arrange(year, pop) %>%
+  filter(country == "China"| country == "India") %>% 
+  ggplot(aes(country,pop)) +
+  geom_boxplot(aes(fill = country))+
+  ggtitle("Population in each year from China and India")
+```
+
+![](explore-gapminder_files/figure-markdown_github/unnamed-chunk-19-1.png)
+
+![](https://github.com/STAT545-UBC-students/hw02-Sukeysun/blob/master/pictures/unnamed-chunk-19-1.png)
 
 ------------------------------------------------------------------------
 
